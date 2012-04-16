@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PureGallery by abenson</title>
+<script type="text/javascript" language="javascript" src="scripts/swfobject.js"></script>
+<script type="text/javascript">
+// This can be a path to a static xml file or your gallerycms location on your server
+var flashvars = { dataPath: "http://gcms2.gallerycms.com/api/myfeed/xml/9c09b806-84cf-11e1-8def-00e0814b024a" };
+var params = { menu: "false", allowFullScreen: "true", scale: "noScale", wmode: "transparent", bgcolor: "#333333", allowScriptAccess: "sameDomain" };
+var attributes = { };
+swfobject.embedSWF("PureGallery.swf", "flashGallery", "980", "450", "9.0.0","scripts/expressInstall.swf", flashvars, params, attributes);</script>
+<style type="text/css">
+body{ margin:0; padding:0; background:#3333; font-family:Arial, Helvetica, sans-serif; color:#000; }
+div{ font-size:12px; }
+#container { width:980px; margin:0 auto; padding-top:20px; }
+#flashGallery{ margin:0; padding:0; width:980px; height:450px; background:#333; border:1px solid #000; }
+</style>
+</head>
+<body>
+<div id="container">
+<h1>PureGallery</h1>
+<p>By Aaron Benson - <a href="http://www.gallerycms.com">GalleryCMS</a></h1>
+<p>&copy; 2012 - GalleryCMS, All rights reserved.<br />License: MIT</p>
+<div id="flashGallery"><p align="center"><br />
+	This content requires Adobe Flash Player 9</p>
+	<p align="center"><a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&amp;promoid=BIOW" target="_blank">Download Adobe Flash</a></p>
+</div>
+
+
+<div id="instructions">
+	<p>PureGallery is a Flash/AS3 image gallery that uses GalleryCMS as the backend. A static XML file is provided if you do not intend on using GalleryCMS.</p>
+	<h3>Loading PureGallery into your web page:</h3>
+	<p>Edit the line of JavaScript to link to the XML output URL in your GalleryCMS installation, or to your own static XML file.</p><p>Be sure that your Flash gallery and your CMS installation both reside on the same server, or you will receive a security sandbox violation.</p>
+	<pre>var flashvars = { dataPath: "/gallerycms/index.php/view/xml" };</pre>
+	<p>or</p>
+	<pre>var flashvars = { dataPath: "assets/xml/gallery.xml" };</pre>
+	<h3>Loading PureGallery as a SWF in your application:</h3>
+	<p>Pure Gallery also supports being loaded as a SWF. View fla/loading_as_a_swf.fla to see how this is done. Inside it contains all the code for you to do this.</p>
+	<pre>
+	var file:String = "PureGallery.swf";
+	var loader:Loader = new Loader();
+	var urlRequest:URLRequest = new URLRequest( file );
+	loader.contentLoaderInfo.addEventListener( Event.INIT, _onInit );
+	loader.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, _onIOError );
+	loader.load( urlRequest );
+
+	function _onInit( e:Event ):void
+	{
+		this.addChild( LoaderInfo( e.currentTarget ).loader );
+		// You can change this to be the path to your gallerycms installation directory
+		Object( loader.content ).dataPath = "assets/xml/gallery.xml";
+		loader.contentLoaderInfo.removeEventListener( Event.INIT, _onInit );
+		loader.contentLoaderInfo.removeEventListener( IOErrorEvent.IO_ERROR, _onIOError );
+	}
+	function _onIOError( e:IOErrorEvent ):void
+	{
+		trace( "Cannot load " + file );
+	}
+	</pre>
+</div>
+
+</div>
+</body>
+</html>
